@@ -1,0 +1,227 @@
+﻿<Window x:Class="RGRSortings.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RGRSortings"
+        mc:Ignorable="d"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="MainWindow"
+        Height="550"
+        MinHeight="550"
+        Width="525"
+        MinWidth="500">
+    <Window.Resources>
+        <!--Шаблон для отображения элементов списка-->
+        <DataTemplate x:Key="dt">
+            <!--Указываем текстовое поле
+                Свойству Text указываем привязку к свойству Value,
+                в Mode указываем TwoWay - означает, что привязка двухсторонняя,
+                либо берем данные с какой-то коллекции, либо меняем определенный элемент напрямую,
+                https://professorweb.ru/my/WPF/binding_and_styles_WPF/level8/8_2.php.
+            
+            
+                UpdateSourceTrigger - свойство, указывающее на то, как обновлять данные,
+                в данном случае используется по подписке на событие PropertyChanged, которое
+                указано в классе BaseItem (смотреть метод ChangeProperty)           
+            -->
+            <TextBox Text="{Binding Value,
+                                Mode=TwoWay,
+                                UpdateSourceTrigger=PropertyChanged}"
+                     FontSize="16">
+                <TextBox.Style>
+                    <!--Здесь создаем тригер, который будет срабатывать при невалидных значениях
+                        в TargetType указываем TextBox, свойству ToolTip (всплывающая подсказка)
+                        в качестве сообщения указываем на ошибку, которую совершает пользователь 
+                        и подсвечиваем текст красным цветом
+                    -->
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="ToolTip"
+                                        Value="{Binding RelativeSource={RelativeSource Self},
+                                                  Path=(Validation.Errors)[0].ErrorContent}" />
+                                <Setter Property="Foreground" Value="Red" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Row="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <GroupBox Header="Характеристики КОД"
+                      Grid.Row="0">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Margin="0 5"
+                                Grid.Row="0">
+                        <TextBlock Text="Выберите тип КОД"/>
+
+                        <RadioButton Name="IntRB"
+                                     Content="Целое число"
+                                     Margin="0 5"
+                                     IsChecked="True"/>
+
+                        <RadioButton Name="DoubleRB"
+                                     Content="Вещественное число"
+                                     Margin="0 5"/>
+
+                        <RadioButton Name="CharRB"
+                                     Content="Символ"
+                                     Margin="0 5"/>
+                    </StackPanel>
+
+                    <StackPanel Name="SizeCODPanel"
+                                Grid.Row="1">
+
+                        <TextBlock Text="Введите размер КОД"/>
+
+                        <!--Здесь указываем длину коллекции-->
+                        <TextBox Name="LengthCOD"
+                                 Margin="0 5"
+                                 Text="1"/>
+
+                        <CheckBox Name="RandomCB"
+                                  Content="Заполнить рандомом"                            
+                                  Margin="0 5"
+                                  IsChecked="True"/>
+                        
+                        <!--кнопка создания КОД, подписываемся на событие Click -->
+                        <Button Name="CreateCODButton"
+                                Content="Создать КОД"
+                                Click="CreateCODButton_Click"/>
+
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1"
+                      Header="Выберите вид сортировки">
+                <StackPanel>
+                    <StackPanel Name="CODSettingsBox"
+                                Margin="0 5"
+                                IsEnabled="False">
+
+                        <RadioButton Name="ShakerRB"
+                                     Content="Шейкер-сортировка"
+                                     Margin="0 5"
+                                     IsChecked="True"/>
+
+                        <RadioButton Name="InsertionRB"
+                                     Content="Сортировка вставками"/>
+
+                        <Button Name="SortingButton"
+                                Content="Посмотреть результат"
+                                Margin="0 5"
+                                Click="SortingButton_Click"/>
+                    </StackPanel>
+                    
+                    <!--Кнопка запуска сессии, также подписываемся на собтие-->
+                    <Button Name="SessionStartButton"
+                            Content="Выполнить сессию"
+                            Click="SessionStartButton_Click"/>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Column="1"
+             Margin="5 0"
+              Grid.Row="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Name="ControlButtonsPanel"
+                        IsEnabled="False"
+                        Orientation="Horizontal"
+                        Margin=" 0 5"
+                        Grid.Row="0">
+
+                <!--Кнопка для добавления элемента в КОД-->
+                <Button Name="AddItemButton"
+                        FontFamily="Segoe MDL2 Assets"
+                        Content=""
+                        FontSize="20"
+                        Click="AddItemButton_Click"/>
+
+
+                <!--Кнопка для удаления элемента в КОД-->
+                <Button Name="RemoveItemButton"
+                        FontFamily="Segoe MDL2 Assets"
+                        Content=""
+                        FontSize="20"
+                        Margin="10 0"
+                        Click="RemoveItemButton_Click"/>
+
+            </StackPanel>
+
+
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!--Элементы списка,
+                    SelectionMode - выставлено Multiple - значит, что можно выбирать несколько item'ов
+                    ItemTemplate - шаблон данных, определен выше в ресурсах страницы-->
+                <ListView Name="ItemsListView"
+                          SelectionMode="Multiple"
+                          ItemTemplate="{StaticResource dt}"/>
+
+                <ScrollViewer CanContentScroll="True"
+                              Grid.Column="1"
+                              Margin="10"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+                    <Image Name="GraphImage"/>
+                </ScrollViewer>
+            </Grid>
+
+
+            <!--Здесь будет выводится информация о результате сортировки-->
+            <StackPanel Name="ResultInfoCalculatingPanel"
+                        Grid.Row="2">
+                <TextBlock Text="{Binding Path=CountChecks, StringFormat=Количество сравнений: {0}}"/>
+                <TextBlock Text="{Binding Path=CountComparisons, StringFormat=Количество перестановок: {0}}"/>
+                <TextBlock Text="{Binding Path=TimeSorting, StringFormat=Время сортировки: {0} млс.}"/>
+            </StackPanel>
+            
+            <!--Здесь будет храниться текущее состояние КОД-->
+            <ListView Name="SortResultListView"
+                      Margin="0 10"
+                      Grid.Row="3"/>
+        </Grid>
+    </Grid>
+</Window>

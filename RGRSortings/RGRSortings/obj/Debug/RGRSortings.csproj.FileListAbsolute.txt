@@ -1,0 +1,17 @@
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\bin\Debug\RGRSortings.exe.config
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\bin\Debug\RGRSortings.exe
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\bin\Debug\RGRSortings.pdb
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\RGRSortings.csprojResolveAssemblyReference.cache
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\MainWindow.g.cs
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\App.g.cs
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\RGRSortings_MarkupCompile.cache
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\RGRSortings_MarkupCompile.lref
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\MainWindow.baml
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\RGRSortings.g.resources
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\RGRSortings.Properties.Resources.resources
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\RGRSortings.csproj.GenerateResource.Cache
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\RGRSortings.exe
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\RGRSortings.pdb
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\SessionWindow.g.cs
+C:\Users\vladi\Desktop\RGRSortings\RGRSortings\obj\Debug\SessionWindow.baml

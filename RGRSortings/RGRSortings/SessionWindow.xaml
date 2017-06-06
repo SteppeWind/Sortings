@@ -1,0 +1,42 @@
+﻿<Window x:Class="RGRSortings.SessionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RGRSortings"
+        mc:Ignorable="d"
+        Title="SessionWindow"
+        MinHeight="600"
+        Height="600"
+        Width="600"
+        MinWidth="600">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ProgressBar Name="WaitAnalysis"
+                     Height="5"
+                     IsIndeterminate="True"/>
+
+        <DataGrid Name="AnalysisResultDataGrid"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False">
+            <!--Укаываем колонки-->
+            <DataGrid.Columns>
+                <!--Биндим номер теста (NumberTest)-->
+                <DataGridTextColumn Binding="{Binding Path=NumberTest}" Width="10" />
+                <!--Биндим Кол-во элементов КОД (CountElements)-->
+                <DataGridTextColumn Header="Кол-во элементов КОД" Binding="{Binding Path=CountElements}"/>
+                <!--Биндим Теоретическое время (TheoreticalTime)-->
+                <DataGridTextColumn Header="Теоретическое время" Binding="{Binding Path=TheoreticalTime}"/>
+                <!--Биндим Шейкер (ShakerInfo.TimeSorting)-->
+                <DataGridTextColumn Header="Время сортировки (Шейкер)" Binding="{Binding Path=ShakerInfo.TimeSorting}"/>
+                <!--Биндим вставки (InsertionInfo.TimeSorting)-->
+                <DataGridTextColumn Header="Время сортировки (Вставки)" Binding="{Binding Path=InsertionInfo.TimeSorting}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
